@@ -9,12 +9,15 @@ const createCustomer = async (req, res) => {
             })
             return
         }
-        const customer = await customer.CustomerModel({
+        const customer = await CustomerModel({
             name : name,
             email : email,
             password : password,
             address : address
         })
+
+        await customer.save()
+
         res.status(200).json({
             message : "customer created successfully"
         })
