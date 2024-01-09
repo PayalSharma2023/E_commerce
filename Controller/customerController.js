@@ -1,5 +1,6 @@
 const { CustomerModel } = require("../Model/customerModel")
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const createCustomer = async (req, res) => {
 
@@ -12,7 +13,7 @@ const createCustomer = async (req, res) => {
             return
         }
         hash_password = await bcrypt.hash( password, 8 )
-        const customer = await CustomerModel({
+        const customer = new CustomerModel({
             name : name,
             email : email,
             password : hash_password,
@@ -22,7 +23,8 @@ const createCustomer = async (req, res) => {
         await customer.save()
 
         res.status(200).json({
-            message : "customer created successfully"
+            message : "customer created successfully",
+            CustomerId : customer._id
         })
 
     } catch (err) {
@@ -38,7 +40,7 @@ const loginCustomer = async (req, res) => {
             res.status(400).json({message : "please enter email and password"})
             return
         }
-        const exsistingCustomer = await CustomerModel.findOne(email)
+        const exsistingCustomer = await CustomerModel.findOne({email : email})
         if (!exsistingCustomer) {
             res.status(404).json({
                 message : "customer not found"
@@ -49,15 +51,24 @@ const loginCustomer = async (req, res) => {
         const passwordMatch = await bcrypt.compare(password, exsistingCustomer.password)
 
         if (passwordMatch) {
-            res.status(200).json({
-                message : "customer logged in successfully"
+            res.status(401).json({
+                message : "Authentication failed"
             })
             return
         }
+
+        const token = jwt.sign({CustomerId : exsistingCustomer._id}, "secret_key", {expiresIn : '1h'})
+
+        res.status(200).json({
+            token,
+            message : "user logged in successfully"
+        })
 
     } catch (err) {
         res.status(500).json({message : "internal server error" + err})
     }
 }
+
+
 
 module.exports = {createCustomer, loginCustomer}
