@@ -6,9 +6,9 @@ require(dotenv).config()
 
 app.use(express.json())
 
-const MongoDb = process.env.MongoDBString
+const MongoDBString = process.env.MongoDB_url
 
-mongoose.connect(MongoDb) 
+mongoose.connect(MongoDBString) 
     .then((c)=> {
         app.listen(3003), () => {
             console.log('connected to database')
