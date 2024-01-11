@@ -12,8 +12,15 @@ const CustomerSchema = mongoose.Schema({
         type : String,
         require : true,
         validate : ({
-            validator : validator.isEmail(email),
-            message : `${email} must be a email`
+            validator : function(email) {
+                if (typeof email !== 'undefined') {
+                    let isValidEmail = validator.isEmail(email);
+                    return isValidEmail
+                } else {
+                    console.error('email is undefined');
+                    return false;
+                }
+            }
         }),
         unique : true
     },
@@ -23,7 +30,7 @@ const CustomerSchema = mongoose.Schema({
         require : true,
         validate : ({
             validator : function(pass){
-                return  pass.length > 8 
+                return pass && pass.length > 8 
             },
         })
     }, 

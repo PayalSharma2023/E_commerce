@@ -2,13 +2,14 @@ const express = require('express')
 const mongoose = require('mongoose')
 const CustomerRouter = require('./Router/CustomerRoute')
 const app = express()
-require(dotenv).config()
+require('dotenv').config()
 
 app.use(express.json())
 
-const MongoDBString = process.env.MongoDB_url
+const MongoDB = process.env.MongoDBString
+//const MongoDBString = 
 
-mongoose.connect(MongoDBString) 
+mongoose.connect(MongoDB) 
     .then((c)=> {
         app.listen(3003), () => {
             console.log('connected to database')
