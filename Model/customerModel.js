@@ -43,4 +43,4 @@ const CustomerSchema = mongoose.Schema({
 
 const CustomerModel = mongoose.model('customer', CustomerSchema)
 
-module.exports = {CustomerModel}
+module.exports = { CustomerModel }
