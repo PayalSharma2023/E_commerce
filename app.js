@@ -19,3 +19,4 @@ mongoose.connect(MongoDB)
     })
 
 app.use('/customer', CustomerRouter)
+app.use('/order', OrderRouter)
