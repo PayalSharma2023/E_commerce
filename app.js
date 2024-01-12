@@ -6,7 +6,7 @@ require('dotenv').config()
 
 app.use(express.json())
 
-const MongoDB = process.env.MongoDBString
+const MongoDB = "mongodb+srv://ecomm:ecomm2024ecomm@cluster0.w2gzl3f.mongodb.net/?retryWrites=true&w=majority"
 //const MongoDBString = 
 
 mongoose.connect(MongoDB) 
