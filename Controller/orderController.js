@@ -1,5 +1,4 @@
 const { OrderModel } = require("../Model/OrderModel");
-const OrderModel = require("../Model/customerModel")
 
 const OrderPlaced = async (req, res) => {
     const {product, customer, deliveryDate} = req.body;

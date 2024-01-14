@@ -1,6 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const CustomerRouter = require('./Router/CustomerRoute')
+const OrderRouter = require('./Router/OrderRoute')
+const ProductRouter = require('./Router/ProductRoute')
 const app = express()
 require('dotenv').config()
 
