@@ -16,6 +16,8 @@ const OrderPlaced = async (req, res) => {
             deliveryDate : deliveryDate
         })
 
+        await order.save()
+
         res.status(200).json({
             messsage : "order placed successfully",
             order : order._id
