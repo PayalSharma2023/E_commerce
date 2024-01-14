@@ -1,6 +1,6 @@
 const {ProductModel} = require("../Model/ProductModel")
 
-const Product = async (req, res) => {
+const AddProduct = async (req, res) => {
     try {
     const {name, description, price, image, AddToWishlist} = req.body
 
@@ -32,6 +32,45 @@ const Product = async (req, res) => {
     }
 }
 
+const UpdateProduct =  async (req, res) => {
+    try {
+        const {productId, Updatedfields} = req.body
+        if (! productId || !Updatedfields) {
+            res.status(400).json({
+                message : "please enter productId and UPdatedfields"
+            })
+            return
+        }
+        const updatedProduct = ProductModel.findByIdAndUPdate(
+            productId, 
+            {$set: Updatedfields},
+            {new : true}
+            )
+        
+        if (!updatedProduct) {
+            res.status(404).json({
+                message : "Product not found"
+            })
+            return
+        }
+
+        res.status(200).json({
+            message : "Products updated successfully",
+            updatedProduct
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error" + err
+        })
+    }
+
+}
+
+
+
+
 module.exports = {
-    Product
+    AddProduct,
+    UpdateProduct
 }
