@@ -98,13 +98,13 @@ const deleteProduct = async (req, res) => {
 }
 
 const VerifyUser = async (req, res, next) => {
-    const token = req.header('Authorization');
-    if (!token) {res.status(401).json({message : "Invalid Token"})}
+    const bearerHeader = req.header('Authorization');
+    if (!bearerHeader) {res.status(401).json({message : "Invalid bearerHeader"})}
     try{
-        const decoded = jwt.verify(token, 'abcdabcd')
+        const decoded = jwt.verify(bearerHeader, 'abcdabcd')
         req.userID = decoded.userID
         console.log("authorized : ", decoded)
-        res.status(200).josn({message : "token verified successfully"})
+        res.status(200).josn({message : "bearerHeader verified successfully"})
         next()
 
     } catch (err) {
