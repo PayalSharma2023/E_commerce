@@ -97,8 +97,26 @@ const deleteProduct = async (req, res) => {
     }
 }
 
+const VerifyUser = async (req, res, next) => {
+    const token = req.header('Authorization');
+    if (!token) {res.status(401).json({message : "Invalid Token"})}
+    try{
+        const decoded = jwt.verify(token, 'abcdabcd')
+        req.userID = decoded.userID
+        console.log("authorized : ", decoded)
+        res.status(200).josn({message : "token verified successfully"})
+        next()
+
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error" + err
+        })
+    }
+}
 
 module.exports = {
     AddProduct,
-    UpdateProduct
+    UpdateProduct,
+    deleteProduct,
+    VerifyUser
 }
