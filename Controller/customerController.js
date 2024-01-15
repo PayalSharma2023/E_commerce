@@ -1,6 +1,7 @@
 const { CustomerModel } = require("../Model/customerModel")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 const createCustomer = async (req, res) => {
 
@@ -71,6 +72,23 @@ const loginCustomer = async (req, res) => {
     }
 }
 
+const VerifyUser = async (req, res, next) => {
+    const bearerHeader = req.header('Authorization');
+    if (!bearerHeader) {res.status(401).json({message : "Invalid bearerHeader"})}
+    try{
+        const decoded = jwt.verify(bearerHeader, process.env.Token_Secret as string, (err : any, user : any) => {
+            console.log(err)
+        })
+        req.userID = decoded.userID
+        console.log("authorized : ", decoded)
+        res.status(200).josn({message : "bearerHeader verified successfully"})
+        next()
 
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error" + err
+        })
+    }
+}
 
-module.exports = {createCustomer, loginCustomer}
+module.exports = {createCustomer, loginCustomer, VerifyUser}
