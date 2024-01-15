@@ -76,7 +76,7 @@ const VerifyUser = async (req, res, next) => {
     const bearerHeader = req.header('Authorization');
     if (!bearerHeader) {res.status(401).json({message : "Invalid bearerHeader"})}
     try{
-        const decoded = jwt.verify(bearerHeader, process.env.Token_Secret as string, (err : any, user : any) => {
+        const decoded = jwt.verify(bearerHeader, process.env.Token_Secret, (err) => {
             console.log(err)
         })
         req.userID = decoded.userID
