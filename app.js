@@ -13,12 +13,15 @@ const MongoDB = "mongodb+srv://ecomm:ecomm2024ecomm@cluster0.w2gzl3f.mongodb.net
 
 mongoose.connect(MongoDB) 
     .then((c)=> {
-        app.listen(3003), () => {
+        app.listen(3003, () => {
             console.log('connected to database')
             console.log('server running on port 3003')
-        }
+        })
 
     })
+
+//blob storage
+
 
 app.use('/customer', CustomerRouter)
 app.use('/order', OrderRouter)
