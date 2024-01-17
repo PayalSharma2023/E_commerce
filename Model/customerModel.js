@@ -42,6 +42,7 @@ const CustomerSchema = mongoose.Schema({
 
     user : {
         type : String,
+        //to define who is using the website i.e limiting their options to three
         enum : ['seller', 'customer', 'admin'],
         require : true
     }
