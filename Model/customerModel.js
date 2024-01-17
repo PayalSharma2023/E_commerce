@@ -38,6 +38,12 @@ const CustomerSchema = mongoose.Schema({
     address : {
         type : String,
         require : true
+    },
+
+    user : {
+        type : String,
+        enum : ['seller', 'customer', 'admin'],
+        require : true
     }
 })
 
