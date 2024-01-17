@@ -11,3 +11,7 @@ const CartSchema = mongoose.Schema({
         ref : 'wishlist'
     }
 })
+
+const CartModel = mongoose.model('cart', CartSchema)
+
+module.exports = { CartModel }
