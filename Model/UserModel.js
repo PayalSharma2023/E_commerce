@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
-const CustomerSchema = mongoose.Schema({
+const UserSchema = mongoose.Schema({
     name : {
         type : String,
         trim : true,
@@ -48,6 +48,6 @@ const CustomerSchema = mongoose.Schema({
     }
 })
 
-const CustomerModel = mongoose.model('customer', CustomerSchema)
+const UserModel = mongoose.model('user', UserSchema)
 
-module.exports = { CustomerModel }
+module.exports = { UserModel }

@@ -1,4 +1,4 @@
-const { CustomerModel } = require("../Model/customerModel")
+const { UserModel } = require("../Model/UserModel")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
@@ -14,7 +14,7 @@ const createCustomer = async (req, res) => {
             return
         }
         hash_password = await bcrypt.hash( password, 8 )
-        const customer = new CustomerModel({
+        const customer = new UserModel({
             name : name,
             email : email,
             password : hash_password,
@@ -43,7 +43,7 @@ const loginCustomer = async (req, res) => {
             res.status(400).json({message : "please enter email and password"})
             return
         }
-        const exsistingCustomer = await CustomerModel.findOne({email : email})
+        const exsistingCustomer = await UserModel.findOne({email : email})
         if (!exsistingCustomer) {
             res.status(404).json({
                 message : "customer not found"
