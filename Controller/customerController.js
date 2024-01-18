@@ -16,7 +16,15 @@ const removeProductFromWishlist = async (req, res) => {
 
 }
 
-const filterProducts = (req, res) => {
+const filterProducts = async (req, res) => {
+
+}
+
+const TrackOrder = async (req, res) => {
+
+}
+
+const customerAuth = async (req, res) => {
 
 }
 
@@ -25,5 +33,7 @@ module.exports = {
     OrderProducts, 
     addProductToWishlist, 
     removeProductFromWishlist, 
-    filterProducts
+    filterProducts,
+    TrackOrder,
+    customerAuth
 }
