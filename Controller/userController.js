@@ -3,11 +3,11 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
-const createCustomer = async (req, res) => {
+const createUser = async (req, res) => {
 
     try {
-        const {name, email, password, address} = req.body
-        if (!name || !email || !password ||!address) {
+        const {name, email, password, address, user} = req.body
+        if (!name || !email || !password ||!address ||!user) {
             res.status(400).json({
                 message : "please enter name, email, password and address"
             })
@@ -18,7 +18,8 @@ const createCustomer = async (req, res) => {
             name : name,
             email : email,
             password : hash_password,
-            address : address
+            address : address,
+            user : user
         })
 
         await customer.save()
@@ -36,7 +37,7 @@ const createCustomer = async (req, res) => {
 
 }
 
-const loginCustomer = async (req, res) => {
+const login = async (req, res) => {
     try {
         const {email, password} = req.body
         if (!email || !password) {
@@ -91,4 +92,4 @@ const VerifyUser = async (req, res, next) => {
     }
 }
 
-module.exports = {createCustomer, loginCustomer, VerifyUser}
+module.exports = {createUser, login, VerifyUser}

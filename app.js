@@ -1,6 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const CustomerRouter = require('./Router/CustomerRoute')
+const UserRouter = require('./Router/UserRoute')
 const OrderRouter = require('./Router/OrderRoute')
 const ProductRouter = require('./Router/ProductRoute')
 const app = express()
@@ -23,6 +23,6 @@ mongoose.connect(MongoDB)
 //blob storage
 
 
-app.use('/customer', CustomerRouter)
+app.use('/customer', UserRouter)
 app.use('/order', OrderRouter)
 app.use('/product', ProductRouter)
