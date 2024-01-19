@@ -15,8 +15,7 @@ const AddProduct = async (req, res) => {
         name : name,
         description : description,
         price : price,
-        image : image,
-        AddToWishlist : AddToWishlist
+        image : image
     })
 
     await products.save()
