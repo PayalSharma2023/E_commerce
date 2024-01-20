@@ -26,7 +26,8 @@ const createUser = async (req, res) => {
 
         res.status(200).json({
             message : "customer created successfully",
-            CustomerId : customer._id
+            CustomerId : customer._id,
+            token
         })
 
     } catch (err) {
@@ -44,7 +45,7 @@ const login = async (req, res) => {
             res.status(400).json({message : "please enter email and password"})
             return
         }
-        const exsistingCustomer = await UserModel.findOne({email : email})
+        const exsistingCustomer = await UserModel.findOne({email : email}).select('+password')
         if (!exsistingCustomer) {
             res.status(404).json({
                 message : "customer not found"
@@ -54,14 +55,18 @@ const login = async (req, res) => {
 
         const passwordMatch = await bcrypt.compare(password, exsistingCustomer.password)
 
-        if (passwordMatch) {
+        console.log("Is Password Matched: ", passwordMatch)
+
+        if (!passwordMatch) {
             res.status(401).json({
                 message : "Authentication failed"
             })
             return
         }
 
-        const token = jwt.sign({CustomerId : exsistingCustomer._id}, "secret_key", {expiresIn : '1h'})
+        const refreshedUser = await UserModel.findOne({email : email})
+
+        const token = jwt.sign({user : refreshedUser}, "secret_key", {expiresIn : '1h'})
 
         res.status(200).json({
             token,

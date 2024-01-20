@@ -23,6 +23,6 @@ mongoose.connect(MongoDB)
 //blob storage
 
 
-app.use('/customer', UserRouter)
+app.use('/user', UserRouter)
 app.use('/order', OrderRouter)
 app.use('/product', ProductRouter)
