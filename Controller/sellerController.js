@@ -21,8 +21,8 @@ const confirmDelivery = async(req, res) => {
 
 }
 
-const sellerAuth = async (req, res) => {
-
+const sellerAuth = async (req, res, next) => {
+    next()
 }
 
 module.exports = {getAllOrders, GetProductsAdded, DeliverOrder, confirmDelivery, sellerAuth, GetFamousProduct}

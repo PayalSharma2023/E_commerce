@@ -4,8 +4,11 @@ const { sellerAuth } = require('../Controller/sellerController')
 
 const router = express.Router()
 
-router.post('/addProduct',sellerAuth, AddProduct)
+router.post('/addProduct', AddProduct)
 router.put('/updateProduct',sellerAuth, UpdateProduct)
 router.delete('/deleteProduct',sellerAuth, deleteProduct)
+
+
+
 
 module.exports = router

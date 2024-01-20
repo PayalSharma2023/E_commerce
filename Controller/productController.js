@@ -2,9 +2,9 @@ const {ProductModel} = require("../Model/ProductModel")
 
 const AddProduct = async (req, res) => {
     try {
-    const {name, description, price, image, AddToWishlist} = req.body
+    const {name, description, price, image} = req.body
 
-    if (!name || !description || !price || !image || !AddToWishlist){
+    if (!name || !description || !price || !image){
         res.status(400).json({
             message : "please enter name, description, price, image and AddtoWishlist "
         })

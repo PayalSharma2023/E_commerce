@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const UserRouter = require('./Router/UserRoute')
 const OrderRouter = require('./Router/OrderRoute')
 const ProductRouter = require('./Router/ProductRoute')
+const CustomerRouter = require('./Router/customerRoute')
+
 const app = express()
 require('dotenv').config()
 
@@ -26,3 +28,4 @@ mongoose.connect(MongoDB)
 app.use('/user', UserRouter)
 app.use('/order', OrderRouter)
 app.use('/product', ProductRouter)
+app.use('/customer', CustomerRouter)
