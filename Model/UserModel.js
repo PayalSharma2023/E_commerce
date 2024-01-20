@@ -45,6 +45,10 @@ const UserSchema = mongoose.Schema({
         //to define who is using the website i.e limiting their options to three
         enum : ['seller', 'customer', 'admin'],
         require : true
+    },
+
+    wishlist : {
+        type : Array
     }
 })
 
