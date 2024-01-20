@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
-const { link } = require('../Router/CustomerRoute')
+
 const ProductSchema = mongoose.Schema({
     name : {
         type : String,
