@@ -26,6 +26,7 @@ const GetProducts = async (req, res) => {
 
 }
 
+//order products crosschecked working succesfully
 const OrderProducts = async (req, res) => {
     try {
         const productId = req.query.productId
@@ -79,6 +80,11 @@ const OrderProducts = async (req, res) => {
 
 }
 
+const CancelOrder = async (req, res) => {
+
+}
+
+//addProductToWishlist crosschecked and it is working successfully
 const addProductToWishlist = async (req, res) => {
     try {
         const productId = req.query.productId
@@ -186,6 +192,7 @@ const TrackOrder = async (req, res) => {
 
 }
 
+//customer Authentication working successfully
 const customerAuth = async (req, res, next) => {
     const bearerHeader = req.header('Authorization');
     if (!bearerHeader) {
@@ -223,7 +230,7 @@ const customerAuth = async (req, res, next) => {
 }
 
 module.exports = {
-    GetProducts, OrderProducts,
+    GetProducts, OrderProducts,CancelOrder,
     addProductToWishlist, removeProductFromWishlist, filterProducts, TrackOrder,
     customerAuth
 }
