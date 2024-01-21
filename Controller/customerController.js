@@ -1,6 +1,7 @@
 const { UserModel } = require('../Model/UserModel')
 const { OrderModel } = require('../Model/OrderModel')
 const jwt = require('jsonwebtoken')
+const { ProductModel } = require('../Model/ProductModel')
 
 // const { use } = require('./Router/CustomerRoute')
 
@@ -27,19 +28,40 @@ const GetProducts = async (req, res) => {
 
 const OrderProducts = async (req, res) => {
     try {
-        const {product , user} = req.body
-        const userID = req.body.userID
-        if (!userID || !productId) {
+        const productId = req.query.productId
+        if (!productId) {
             res.status(400).json({
-                message : "Please enter Product id and user id"
+                message : "Please enter productId"
+            })
+            return
+        }
+        const product = await ProductModel.findOne({
+            productId : req.body._id
+        })
+
+        if (!product) {
+            res.status(404).json({
+                message : "product not found"
             })
             return
         }
 
+        // if (Order.includes({product : product._id})){
+        //     res.status(400).json({
+        //         message : "order placed already"
+        //     })
+        //     return
+        // }
+
+        //const now = new Date();
+//const threeDayLater = Math.floor(new Date(now.setDate(now.getDate() + 3)).getTime() / 1000)
+
+
         const Order = await OrderModel({
-            product : product._id,
-            user : user._id,
-            deliveryDate : Date.now() + 3
+            product : product,
+            user : req.user._id,
+            deliveryDate : Date.now() + 3*24*60*60*1000
+            //date.now() returns the date and time in milli second
         })
 
         await Order.save()
@@ -154,6 +176,9 @@ const removeProductFromWishlist = async (req, res) => {
 }
 
 const filterProducts = async (req, res) => {
+    //sort
+    //aggregation pipeline
+    //pagination
 
 }
 

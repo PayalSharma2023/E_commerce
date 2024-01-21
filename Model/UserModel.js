@@ -45,6 +45,11 @@ const UserSchema = mongoose.Schema({
         type : String,
         //to define who is using the website i.e limiting their options to three
         enum : ['seller', 'customer', 'admin'],
+        /*for customer
+        i want to add this list
+        orders : [{
+            type : mongoose.Schema.ObjectId
+        }]*/
         require : true
     },
 
