@@ -1,4 +1,5 @@
 const { UserModel } = require('../Model/UserModel')
+const { OrderModel } = require('../Model/OrderModel')
 const jwt = require('jsonwebtoken')
 
 // const { use } = require('./Router/CustomerRoute')
@@ -26,8 +27,33 @@ const GetProducts = async (req, res) => {
 
 const OrderProducts = async (req, res) => {
     try {
+        const {product , user} = req.body
+        const userID = req.body.userID
+        if (!userID || !productId) {
+            res.status(400).json({
+                message : "Please enter Product id and user id"
+            })
+            return
+        }
 
-    } catch ()
+        const Order = await OrderModel({
+            product : product._id,
+            user : user._id,
+            deliveryDate : Date.now() + 3
+        })
+
+        await Order.save()
+        
+        res.status(200).json({
+            message : "order placed successfully"
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            message : 'internal server error',
+            error : err.stack
+        })
+    }
 
 }
 

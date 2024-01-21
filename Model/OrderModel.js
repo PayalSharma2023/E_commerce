@@ -8,10 +8,10 @@ const OrderSchema = mongoose.Schema({
     },
     customer : {
         type : mongoose.Schema.ObjectId,
-        ref : 'customer'
+        ref : 'user'
     },
     deliveryDate : {
-        type : String
+        type : Date
     }
 })
 
