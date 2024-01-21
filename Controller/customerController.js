@@ -25,6 +25,9 @@ const GetProducts = async (req, res) => {
 }
 
 const OrderProducts = async (req, res) => {
+    try {
+
+    } catch ()
 
 }
 
