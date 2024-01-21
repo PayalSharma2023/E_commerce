@@ -87,7 +87,7 @@ const VerifyUser = async (req, res, next) => {
         })
         req.userID = decoded.userID
         console.log("authorized : ", decoded)
-        res.status(200).josn({message : "bearerHeader verified successfully"})
+        res.status(200).json({message : "bearerHeader verified successfully"})
         next()
 
     } catch (err) {

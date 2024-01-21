@@ -169,11 +169,7 @@ const customerAuth = async (req, res, next) => {
 }
 
 module.exports = {
-    GetProducts,
-    OrderProducts,
-    addProductToWishlist,
-    removeProductFromWishlist,
-    filterProducts,
-    TrackOrder,
+    GetProducts, OrderProducts,
+    addProductToWishlist, removeProductFromWishlist, filterProducts, TrackOrder,
     customerAuth
 }
