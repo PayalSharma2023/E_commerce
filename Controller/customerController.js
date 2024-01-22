@@ -7,7 +7,7 @@ const { ProductModel } = require('../Model/ProductModel')
 
 const GetProducts = async (req, res) => {
     try {
-        const products = await UserModel.find()
+        const products = await ProductModel.find()
         if (!products) {
             res.status(404).json({ message: "product not found" })
             return
@@ -15,7 +15,7 @@ const GetProducts = async (req, res) => {
 
         res.status(200).json({
             message: "Products retrieved successffully",
-            products
+            products : products
         })
 
     } catch (err) {
@@ -79,10 +79,10 @@ const OrderProducts = async (req, res) => {
     }
 
 }
-
+// cancel order api crosschecked and it is working successfully
 const CancelOrder = async (req, res) => {
     try {
-        const OrderId = req.body.OrderId
+        const OrderId = req.query.OrderId
         if ( !OrderId ) {
             res.status(400).json({
                 message : "Please enter order id"
@@ -210,6 +210,25 @@ const removeProductFromWishlist = async (req, res) => {
 }
 
 const filterProducts = async (req, res) => {
+    try{
+        //const productId = req.query.productId
+        console.log('hi')
+        const Products = await ProductModel.find().sort(
+            {
+                price : 1
+            }
+        )
+        res.status(200).json({
+            message : "products sorted successfully",
+            products : Products
+        })
+
+
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error"
+        })
+    }
     //sort
     //aggregation pipeline
     //pagination
