@@ -81,6 +81,34 @@ const OrderProducts = async (req, res) => {
 }
 
 const CancelOrder = async (req, res) => {
+    try {
+        const OrderId = req.body.OrderId
+        if ( !OrderId ) {
+            res.status(400).json({
+                message : "Please enter order id"
+            })
+            return
+        }
+
+        const CancelOrder = await OrderModel.findByIdAndDelete(OrderId);
+
+        if (CancelOrder == undefined) {
+            res.status(400).json({
+                message : "Order does not exist"
+            })
+            return
+        }
+
+        res.status(200).json({
+            message : "Order cancelled successfully",
+            CancelOrder
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error" + err
+        })
+    }
 
 }
 
