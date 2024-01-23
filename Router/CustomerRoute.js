@@ -1,8 +1,9 @@
 const express = require('express')
-const { GetProducts, OrderProducts, CancelOrder, addProductToWishlist, removeProductFromWishlist, filterProducts, TrackOrder, customerAuth } = require('../Controller/customerController')
+const { getAll, GetProducts, OrderProducts, CancelOrder, addProductToWishlist, removeProductFromWishlist, filterProducts, TrackOrder, customerAuth } = require('../Controller/customerController')
 
 const router = express.Router()
 
+router.get('getAll', getAll)
 router.get('/get_all_products',customerAuth, GetProducts)
 router.get('/order_product',customerAuth, OrderProducts)
 router.delete('/cancel_order', customerAuth, CancelOrder)

@@ -5,6 +5,24 @@ const { ProductModel } = require('../Model/ProductModel')
 
 // const { use } = require('./Router/CustomerRoute')
 
+const getAll = async (req, res) => {
+    try {
+        const AllTasks = await TaskModel.find().sort({date : 1, time : 1});
+        //console.log("alltasks", AllTasks);
+        res.status(200).json({
+            message : "data retrieved successfully",
+            tasks : AllTasks
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error"
+        })
+    }
+
+}
+
+
 const GetProducts = async (req, res) => {
     try {
         const products = await ProductModel.find()
@@ -282,7 +300,7 @@ const customerAuth = async (req, res, next) => {
     }
 }
 
-module.exports = {
+module.exports = {getAll,
     GetProducts, OrderProducts,CancelOrder,
     addProductToWishlist, removeProductFromWishlist, filterProducts, TrackOrder,
     customerAuth
