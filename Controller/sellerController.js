@@ -2,8 +2,32 @@ const {ProductModel} = require('../Model/ProductModel')
 const {OrderModel} = require('../Model/OrderModel')
 const { Jwt } = require('jsonwebtoken')
 
-const getAllOrders = async (req, res) => {
+const GetAllOrders = async (req, res) => {
+    try {
+        // const OrderId = req.query.OrderId
+    // if (!OrderId) {
+    //     res.status(400).json({
+    //         message : "Please enter order id"
+    //     })
+    // }
+    const getOrders = await OrderModel.find()
+    if (!getOrders) {
+        res.status(404).json({
+            message : "Orders not found"
+        })
+        return
+    }
+    res.status(200).josn({
+        message : "Orders retrieved successfully",
+        orders : getOrders
+    })
 
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error"
+        })
+    }
+    
 }
 
 const GetProductsAdded = async (req, res) => {
@@ -61,4 +85,4 @@ const sellerAuth = async (req, res, next) => {
 
 }
 
-module.exports = {getAllOrders, GetProductsAdded, DeliverOrder, confirmDelivery, sellerAuth, GetFamousProduct}
+module.exports = {GetAllOrders, GetProductsAdded, DeliverOrder, confirmDelivery, sellerAuth, GetFamousProduct}

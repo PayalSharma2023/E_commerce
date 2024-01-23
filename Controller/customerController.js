@@ -236,7 +236,13 @@ const filterProducts = async (req, res) => {
 }
 
 const TrackOrder = async (req, res) => {
+    try {
 
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error" + err
+        })
+    }
 }
 
 //customer Authentication working successfully
