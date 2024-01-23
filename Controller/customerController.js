@@ -7,7 +7,7 @@ const { ProductModel } = require('../Model/ProductModel')
 
 const getAll = async (req, res) => {
     try {
-        const AllTasks = await TaskModel.find().sort({date : 1, time : 1});
+        const AllTasks = await ProductModel.find()//sort({date : 1, time : 1});
         //console.log("alltasks", AllTasks);
         res.status(200).json({
             message : "data retrieved successfully",
