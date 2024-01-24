@@ -44,6 +44,20 @@ const GetProducts = async (req, res) => {
 
 }
 
+const RateProducts = async (req, res) => {
+    try {
+        const rate = req.query.rate
+        if (rate) {
+            
+        }
+
+    } catch (err) {
+        res.status(500).josn({
+            message : "internal server error"
+        })
+    }
+}
+
 //order products crosschecked working succesfully
 const OrderProducts = async (req, res) => {
     try {

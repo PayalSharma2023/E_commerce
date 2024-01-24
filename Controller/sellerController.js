@@ -31,10 +31,37 @@ const GetAllOrders = async (req, res) => {
 }
 
 const GetProductsAdded = async (req, res) => {
+    try {
+        const products = await ProductModel().find();
 
+        if (!products) {
+            res.status(404).json({
+                message : "No Products added"
+            })
+            return
+        }
+
+        res.status(200).json({
+            message : "Products retrieved successfully",
+            products : products
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error"
+        })
+    }
 }
 
 const GetFamousProduct = async (req, res) => {
+    try {
+        const rating = req.body.rating
+
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error"
+        })
+    }
 
 }
 
