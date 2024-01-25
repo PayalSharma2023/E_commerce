@@ -104,6 +104,13 @@ const DeliverOrder = async (req, res) => {
 }
 
 const confirmDelivery = async(req, res) => {
+    try {
+
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error"
+        })
+    }
 
 }
 
