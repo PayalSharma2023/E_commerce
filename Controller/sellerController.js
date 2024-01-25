@@ -66,6 +66,34 @@ const GetFamousProduct = async (req, res) => {
 }
 
 const DeliverOrder = async (req, res) => {
+    try {
+        const OrderId = req.body.OrderId
+
+        if (!OrderId) {
+            res.status(400).json({
+                message : "Please enter OrderID"
+            })
+            return
+        }
+
+        const Order = await OrderModel.find()
+
+        if(!Order) {
+            res.status(404).json({
+                message : "Order not found"
+            })
+            return
+        }
+
+        if (Order.DeliveryDate == Date.now()) {
+            
+        }
+
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error"
+        })
+    }
 
 }
 
