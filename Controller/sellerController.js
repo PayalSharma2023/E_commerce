@@ -86,8 +86,14 @@ const DeliverOrder = async (req, res) => {
         }
 
         if (Order.DeliveryDate == Date.now()) {
-            
+            res.status(200).json({
+                orderStatus : "Deliver",
+                message : "Order to be delivered Today"//ask from customer by sending a message whether delivered or not
+            })            
+            return
         }
+
+
 
     } catch (err) {
         res.status(500).json({
