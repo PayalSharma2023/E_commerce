@@ -105,6 +105,13 @@ const DeliverOrder = async (req, res) => {
 
 const confirmDelivery = async(req, res) => {
     try {
+        const ProductId = req.query.ProductId
+        if (!ProductId) {
+            res.status(400).json({
+                message : "Please enter Product Id"
+            })
+            return
+        }
 
     } catch (err) {
         res.status(500).json({
