@@ -112,6 +112,11 @@ const confirmDelivery = async(req, res) => {
             })
             return
         }
+        const askCustomer = (delivered) => {
+            if (delivered == true) {
+                customer.orderStatus.true
+            }
+        }
 
     } catch (err) {
         res.status(500).json({
