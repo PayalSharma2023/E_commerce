@@ -15,6 +15,10 @@ const ProductSchema = mongoose.Schema({
     },
     image : {
         type : String
+    },
+    rating : {
+        type : String,
+        enum : ["1","2","3","4","5"]
     }
 
 })
