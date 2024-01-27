@@ -56,6 +56,13 @@ const GetProductsAdded = async (req, res) => {
 const GetFamousProduct = async (req, res) => {
     try {
         const rating = req.body.rating
+        if (!rating) {
+            res.status(400).json({
+                message : "Kindly rate the product"
+            })
+            return
+        }
+        const product = await ProductModel.find()
 
     } catch (err) {
         res.status(500).json({
