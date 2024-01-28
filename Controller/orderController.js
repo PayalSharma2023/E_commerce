@@ -29,4 +29,14 @@ const OrderPlaced = async (req, res) => {
     }
 }
 
-module.exports = { OrderPlaced }
+const UpdateOrder = async (req, res) => {
+    try {
+
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error" + err
+        })
+    }
+}
+
+module.exports = { OrderPlaced, UpdateOrder }
