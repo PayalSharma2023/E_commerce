@@ -31,6 +31,33 @@ const OrderPlaced = async (req, res) => {
 
 const UpdateOrder = async (req, res) => {
     try {
+        const  { OrderID , UpdatedOrder } = req.body.OrderID
+
+        if (!OrderID || !UpdatedOrder) {
+            res.status(400).json({
+                message : "Please enter OrderId and UpdatedOrder"
+            })
+            return
+        }
+        const Order = await OrderModel.findByIdAndUpdate(
+            OrderID,
+            {$set : UpdatedOrder},
+            {new : true}
+        )
+
+        if (!Order) {
+            res.status(404).json({
+                message : "Order not found"
+            })
+            return
+        }
+
+        await Order.save()
+
+        res.status(200).json({
+            message : "Order updated successfully"
+        })
+
 
     } catch (err) {
         res.status(500).json({
