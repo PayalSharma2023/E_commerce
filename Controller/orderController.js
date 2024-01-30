@@ -66,4 +66,15 @@ const UpdateOrder = async (req, res) => {
     }
 }
 
-module.exports = { OrderPlaced, UpdateOrder }
+const DeleteOrder = async  (req, res) => {
+    try {
+        const OrderID = req.body.OrderID
+
+    } catch (err) {
+        res.status(500).json({
+            message : "internal server error" + err
+        })
+    }
+}
+
+module.exports = { OrderPlaced, UpdateOrder, DeleteOrder }
