@@ -69,6 +69,27 @@ const UpdateOrder = async (req, res) => {
 const DeleteOrder = async  (req, res) => {
     try {
         const OrderID = req.body.OrderID
+        
+        if (!OrderID) {
+            res.status(400).json({
+                message : "Please enter Order id"
+            })
+            return
+        }
+
+        const DeleteOrder = await OrderModel.findByIdAndDelete(OrderID)
+
+        if (!DeleteOrder) {
+            res.status(404).json({
+                message : "Order does not exist"
+            })
+            return
+        }
+
+        res.status(200).json({
+            message : "Order deleted successfully",
+            OrderID : OrderID
+        })
 
     } catch (err) {
         res.status(500).json({
