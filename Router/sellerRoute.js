@@ -4,5 +4,7 @@ const {GetAllorders, GetProductsAdded, DeliverOrder, confirmDelivery, sellerAuth
 const router = express.Router()
 
 router.get('get_all_orders', GetAllorders)
+router.get('Get_Products_Added', GetProductsAdded)
+router.get('deliver', DeliverOrder)
 
 module.exports = router
