@@ -128,17 +128,38 @@ const DeliverOrder = async (req, res) => {
 
 const confirmDelivery = async(req, res) => {
     try {
-        const ProductId = req.query.ProductId
-        if (!ProductId) {
+        const OrderID = req.query.OrderID
+        if (!OrderID) {
             res.status(400).json({
                 message : "Please enter Product Id"
             })
             return
         }
-        const askCustomer = (delivered) => {
-            if (delivered == true) {
-                customer.orderStatus.true
-            }
+
+        const order = await OrderModel.findOne({_id: OrderID});
+
+        if (!order) {
+            res.status(404).json({
+                message : "Order not found"
+            })
+            return
+        }
+
+        const delivered = req.body.delivered;
+        const deliveryDate = req.body.deliveryDate;
+
+        if (delivered && deliveryDate) {
+            order.delivered = delivered;
+            order.deliveryDate = deliveryDate;
+            await order.save();
+
+            res.status(400).json({
+                message : "Please enter delivery status and date"
+            })
+        } else {
+            res.status(400).json({
+                message : "Please enter delivery status and date"
+            })
         }
 
     } catch (err) {
