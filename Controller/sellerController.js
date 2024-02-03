@@ -48,7 +48,8 @@ const GetProductsAdded = async (req, res) => {
 
     } catch (err) {
         res.status(500).json({
-            message : "internal server error"
+            message : "internal server error",
+            error : err
         })
     }
 }
@@ -56,17 +57,32 @@ const GetProductsAdded = async (req, res) => {
 const GetFamousProduct = async (req, res) => {
     try {
         const rating = req.body.rating
+
         if (!rating) {
             res.status(400).json({
                 message : "Kindly rate the product"
             })
             return
         }
-        const product = await ProductModel.find()
+
+        const product = await ProductModel.find().sort({rating : -1}).limit(1);
+
+        if (!product) {
+            res.status(404).json({
+                message : "NO Products found"
+            });
+            return
+        }
+        
+        res.status(200).json({
+            message : "Most highly rated product retrieved successfully",
+            product : product[0]
+        });
 
     } catch (err) {
         res.status(500).json({
-            message : "internal server error"
+            message : "internal server error",
+            error : err.stack
         })
     }
 
