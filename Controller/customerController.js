@@ -75,7 +75,8 @@ const RateProducts = async (req, res) => {
 
     } catch (err) {
         res.status(500).josn({
-            message : "internal server error"
+            message : "internal server error",
+            error : err.stack
         })
     }
 }
