@@ -46,10 +46,32 @@ const GetProducts = async (req, res) => {
 
 const RateProducts = async (req, res) => {
     try {
-        const rate = req.query.rate
-        if (rate) {
-            
+        const rate = parseInt(req.query.rate);
+        const productId = req.query.productId;
+
+        if (!productId || rate < 1 || rate > 5) {
+            res.status(400).json({
+                message : "Invalid input"
+            });
+            return;            
         }
+
+        const product = await ProductModel.findById(productId);
+
+        if (!product) {
+            res.status(404).json({
+                message : "Product not found"
+            });
+            return;
+        }
+
+        product.rating = rate;
+        await product.save();
+
+        res.status(200).json({
+            message : "Product rated successfully",
+            product
+        });
 
     } catch (err) {
         res.status(500).josn({
