@@ -292,10 +292,33 @@ const filterProducts = async (req, res) => {
 
 const TrackOrder = async (req, res) => {
     try {
+        const OrderId = req.query.OrderId
+
+        if (!OrderId) {
+            res.status(400).json({
+                message : "Please enter order id"
+            });
+            return;
+        }
+
+        const order = await OrderModel.findById(OrderId);
+
+        if (!order) {
+            res.status(404).json({
+                message : "order not found",
+                order
+            });
+            return
+        }
+
+        res.status(200).json({
+            message : "Order tracked successfully",
+            order
+        })
 
     } catch (err) {
         res.status(500).json({
-            message : "internal server error" + err
+            message : "internal server error" + err.stack
         })
     }
 }
