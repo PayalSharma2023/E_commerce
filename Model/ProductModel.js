@@ -4,21 +4,29 @@ const validator = require('validator')
 const ProductSchema = mongoose.Schema({
     name : {
         type : String,
-        trim : true
+        trim : true,
+        required : true
     },
     description : {
         type : String,
-        trim : true
+        trim : true,
+        required : true
     },
     price : {
-        type : String
+        type : Number,
+        required : true
     },
     image : {
-        type : String
+        type : String,
+        validate : {
+            validator : validator.isURL,
+            message : "Image URL is invalid"
+        }
     },
     rating : {
-        type : String,
-        enum : ["1","2","3","4","5"]
+        type : Number,
+        min : 1,
+        max : 5
     }
 
 })
